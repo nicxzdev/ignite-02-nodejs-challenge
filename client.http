@@ -1,0 +1,57 @@
+@baseUrl = http://localhost:3333
+
+# @name createUser
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+    "name": "nicxz",
+    "email": "email@mail.com"
+}
+
+###
+
+# @name registerMeal
+POST {{baseUrl}}/meals
+Content-Type: application/json
+
+{
+    "name": "Jantar",
+    "description": "Food description",
+    "onDiet": false,
+    "date": "2025-10-10 12:00:00"
+}
+
+###
+
+# @name listMeals
+GET {{baseUrl}}/meals
+
+###
+
+# @name getMeal
+GET {{baseUrl}}/meals/399e57eb-fe8a-4f5d-905d-0bb70a11d98b
+
+###
+
+# @name editMeal
+PATCH {{baseUrl}}/meals
+Content-Type: application/json
+
+{
+    "id": "53cf6ca3-eb6b-432e-bae0-5be034d1c993",
+    "name": "Refeição editada",
+    "description": "Descrição da refeição editada",
+    "onDiet": false,
+    "date": "2025-10-10 12:00:00"
+}
+
+###
+
+# @name deleteMeal
+DELETE {{baseUrl}}/meals/399e57eb-fe8a-4f5d-905d-0bb70a11d98b
+
+###
+
+# @name metrics
+GET {{baseUrl}}/meals/metrics
