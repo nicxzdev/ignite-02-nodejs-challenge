@@ -2,22 +2,21 @@ import { afterAll, afterEach, beforeAll, beforeEach, describe, it } from 'vitest
 import { app } from '../src/app'
 import request from 'supertest'
 import { execSync } from 'child_process'
+import { knex } from '../src/database'
 
 describe('Users Tests', () => {
     beforeAll(async () => {
         await app.ready()
     })
 
-    beforeEach(() => {
+    beforeEach(async () => {
+        await knex.raw('DELETE FROM knex_migrations_lock;')
+        execSync("npm run knex -- migrate:rollback --all")
         execSync("npm run knex -- migrate:latest")
     })
 
     afterAll(async () => {
         await app.close()
-    })
-
-    afterEach(() => {
-        execSync("npm run knex -- migrate:rollback --all")
     })
 
     it('should be able to register an user', async () => {

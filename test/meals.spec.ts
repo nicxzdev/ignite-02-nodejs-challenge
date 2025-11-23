@@ -10,15 +10,12 @@ describe('Meals Tests', () => {
     })
 
     beforeEach(() => {
+        execSync("npm run knex -- migrate:rollback --all")
         execSync("npm run knex -- migrate:latest")
     })
 
     afterAll(async () => {
         await app.close()
-    })
-
-    afterEach(() => {
-        execSync("npm run knex -- migrate:rollback --all")
     })
 
     it('should not be able to access meal routes without a sessionId', async () => {
